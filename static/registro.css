@@ -1,0 +1,137 @@
+* {
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    margin: 0;
+    background-color: #ffffff;
+    min-height: 100vh;
+}
+
+
+.top-bar {
+    width: 100%;
+    height: 40px;
+    background-color: #6f93b8;
+}
+
+
+.container {
+    min-height: calc(100vh - 40px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+h1 {
+    color: #1f3c5b;
+    letter-spacing: 2px;
+    margin-bottom: 30px;
+}
+
+/* Formulario */
+.formulario {
+    width: 320px;
+    display: flex;
+    flex-direction: column;
+}
+
+.formulario label {
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: #1f3c5b;
+    margin-bottom: 6px;
+    margin-top: 18px;
+}
+
+.formulario input,
+.formulario select {
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    background-color: #f0f0f0;
+    font-size: 14px;
+}
+
+.btn-registrar {
+    margin-top: 35px;
+    padding: 14px;
+    background-color: #6f93b8;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.btn-registrar:hover {
+    background-color: #5b7fa3;
+}
+
+#campos_estudiante {
+    display: none;
+}
+
+.fila-doble {
+    display: flex;
+    gap: 15px;
+    margin-top: 18px;
+}
+
+.fila-doble div {
+    flex: 1;
+}
+
+.fila-doble select {
+    width: 100%;
+}
+
+.mensaje-exito {
+    background-color: #e6f4ff;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.mensaje-exito p {
+    color: #1f3c5b;
+    font-size: 16px;
+}
+
+.mensaje-exito button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #6f93b8;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.mensaje-exito button:hover {
+    background-color: #5b7fa3;
+}
+
+/*RESPONSIVE*/
+@media (max-width: 500px) {
+
+    body {
+        overflow: auto; /*para hacer scroll en el celular */
+    }
+
+    .formulario {
+        width: 100%;
+        padding: 0 20px;
+    }
+
+    .fila-doble {
+        flex-direction: column;
+    }
+
+    h1 {
+        font-size: 20px;
+        text-align: center;
+    }
+}

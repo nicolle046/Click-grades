@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='registro.css') }}">
+</head>
+<body>
+
+<div class="top-bar"></div>
+ 
+<div class="container">
+
+    {% if mensaje %}
+        <div class="mensaje-exito">
+            <h2>Registro exitoso</h2>
+            <p>{{ mensaje }}</p>
+            <button onclick="volverRegistro()">Regresar</button>
+        </div>
+
+    {% else %}
+    
+        <h1>REGISTRO</h1>
+
+        <form method="POST" action="/registro" class="formulario">
+
+            <label>NOMBRE</label>
+            <input type="text" name="nombre" required>
+
+            <label>APELLIDO</label>
+            <input type="text" name="apellido" required>
+
+            <label>CORREO ELECTRÓNICO</label>
+            <input type="email" name="correo" required>
+
+            <label>CONTRASEÑA</label>
+            <input type="password" name="contrasena" required>
+
+            <label>ROL</label>
+            <select name="rol" id="rol" onchange="mostrarCampos()" required>
+                <option value="">Seleccionar</option>
+                <option value="estudiante">Estudiante</option>
+                <option value="profesor">Profesor</option>
+            </select>
+
+            <div id="campos_estudiante"
+            class="fila-doble">
+            <div>
+                <label>GRADO</label>
+                <select name="grado">
+                    <option value="">Seleccionar</option>
+                    <option value="6">6°</option>
+                    <option value="7">7°</option>
+                    <option value="8">8°</option>
+                    <option value="9">9°</option>
+                    <option value="10">10°</option>
+                    <option value="11">11°</option>
+                </select>
+            </div>
+
+            
+            <div>
+                <label>GRUPO</label>
+                <select name="grupo">
+                    <option value="">Seleccionar</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            </div>
+
+            <button type="submit" class="btn-registrar">Registrarse</button>
+        </form>
+    {% endif %}
+
+</div>
+
+<script src="{{ url_for('static', filename='registro.js') }}"></script>
+</body>
+</html>

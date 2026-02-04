@@ -98,3 +98,9 @@ def registro():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+    #esto ya es pal login#
+
+    @app.route("/login")
+    def login():
+        return render_template("login.html")

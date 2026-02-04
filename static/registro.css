@@ -135,3 +135,23 @@ h1 {
         text-align: center;
     }
 }
+
+/*alerta correo*/
+.alerta {
+    position: fixed;
+    top: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #f8d7da;
+    color: #842029;
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-size: 14px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    transition: top 0.4s ease;
+    z-index: 1000;
+}
+
+.alerta.mostrar {
+    top: 20px;
+}

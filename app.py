@@ -1,8 +1,9 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for, session
 import sqlite3
 import os
 
 app = Flask(__name__)
+app.secret_key = "password_secure"
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DB_PATH = os.path.join(BASE_DIR, "database.db")
@@ -88,8 +89,8 @@ def registro():
         conn.commit()
         conn.close()
         return render_template(
-    "registro.html",
-    mensaje="Usuario registrado exitosamente"
+            "registro.html",
+            mensaje="Usuario registrado exitosamente"
         )
 
     except sqlite3.Error as e:
@@ -97,16 +98,69 @@ def registro():
     
 @app.route("/login", methods=["GET", "POST"])
 def login():
+    mensaje = None
+
     if request.method == "POST":
-        correo = request.form["correo"]
-        password = request.form["password"]
+        correo = request.form.get("correo", "").strip()
+        contrasena = request.form.get("contrasena", "")
 
-        print(correo, password)  # solo para probar
+        try:
+            conn = get_db()
+            cursor = conn.cursor()
 
-    return render_template("login.html")
+            cursor.execute(
+                "SELECT id_usuario, rol FROM usuario WHERE correo = ? AND contrasena = ?",
+                (correo, contrasena)
+            )
+
+            usuario = cursor.fetchone()
+            conn.close()
+
+            if usuario:
+                # Guardamos datos en sesión
+                session["usuario_id"] = usuario[0]
+                session["correo"] = correo
+                session["rol"] = usuario[1]
+
+                return redirect(url_for("dashboard"))
+            else:
+                mensaje = "Correo o contraseña no válidos"
+
+        except sqlite3.Error as e:
+            return f"<h3>Error de base de datos: {e}</h3>"
+
+    return render_template("login.html", mensaje=mensaje)
+
+
+@app.route("/dashboard")
+def dashboard():
+    if "usuario_id" not in session:
+        return redirect(url_for("login"))
+
+    rol = session.get("rol")
+    correo = session.get("correo")
+
+    if rol == "estudiante":
+        mensaje = "Panel de Estudiante"
+    elif rol == "profesor":
+        mensaje = "Panel de Profesor"
+    else:
+        mensaje = "Panel General"
+
+    return f"""
+    <h2>{mensaje}</h2>
+    <p>Bienvenido</p>
+    <a href='/logout'>Cerrar sesión</a>
+    """
+
+
+@app.route("/logout")
+def logout():
+    session.clear()
+    return redirect(url_for("login"))
+
 
 if __name__ == "__main__":
     app.run(debug=True)
-
 
    

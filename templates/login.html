@@ -10,17 +10,19 @@
     <div class="container">
         <h2>Iniciar sesión</h2>
 
+        {% if mensaje %}
+            <div class="error">
+                {{ mensaje }}
+            </div>
+        {% endif %}
+
         <form method="POST" action="/login">
             <input type="email" name="correo" placeholder="Correo institucional" required>
-            <input type="password" name="password" placeholder="Contraseña" required>
+
+            <input type="password" name="contrasena" placeholder="Contraseña" required>
 
             <button type="submit">Entrar</button>
         </form>
-
-
-
-
-        
     </div>
 
 </body>

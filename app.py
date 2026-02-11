@@ -94,13 +94,19 @@ def registro():
 
     except sqlite3.Error as e:
         return f"<h3>Error de base de datos: {e}</h3>"
+    
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    if request.method == "POST":
+        correo = request.form["correo"]
+        password = request.form["password"]
 
+        print(correo, password)  # solo para probar
+
+    return render_template("login.html")
 
 if __name__ == "__main__":
     app.run(debug=True)
 
-    #esto ya es pal login#
 
-    @app.route("/login")
-    def login():
-        return render_template("login.html")
+   

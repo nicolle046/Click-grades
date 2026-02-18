@@ -29,7 +29,7 @@ def registro():
     grado = request.form.get("grado")
     grupo = request.form.get("grupo")
 
-    if not correo.endswith("@comfandi.edu.co"):
+    if not correo.endswith("comfandi.edu.co"):
         return "<h3>Solo se permiten correos institucionales</h3>"
 
     try:
@@ -52,6 +52,7 @@ def registro():
         id_usuario = cursor.lastrowid
 
         if rol == "estudiante":
+        
             if not grado or not grupo:
                 conn.close()
                 return "<h3>Debe seleccionar grado y grupo</h3>"
@@ -117,7 +118,6 @@ def login():
             conn.close()
 
             if usuario:
-                # Guardamos datos en sesión
                 session["usuario_id"] = usuario[0]
                 session["correo"] = correo
                 session["rol"] = usuario[1]

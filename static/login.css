@@ -1,0 +1,105 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background-color: #e9e9e9;
+}
+
+/* 🔵 Parte superior azul */
+.top-section {
+    background-color: #052c3f; /* azul oscuro del mockup */
+    height: 220px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Logo */
+.logo {
+    width: 230px;
+}
+
+/* 🧾 Sección del login */
+.login-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 60px;
+}
+
+/* Mensaje de error */
+.error {
+    background-color: #ffdddd;
+    color: #a10000;
+    padding: 10px 15px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+/* Formulario */
+form {
+    width: 320px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Labels */
+label {
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: #1c3b4d;
+    margin-bottom: 8px;
+    margin-top: 20px;
+}
+
+/* Inputs redondeados */
+input {
+    padding: 15px;
+    border: none;
+    border-radius: 30px;
+    background-color: #d9d9d9;
+    outline: none;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+/* Focus elegante */
+input:focus {
+    background-color: #ffffff;
+    box-shadow: 0 0 8px rgba(5,44,63,0.3);
+}
+
+/* Botón principal */
+button {
+    margin-top: 40px;
+    padding: 15px;
+    border: none;
+    border-radius: 30px;
+    background-color: #052c3f;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Hover botón */
+button:hover {
+    background-color: #0a3f5a;
+    transform: scale(1.05);
+}
+
+/* Responsive */
+@media (max-width: 400px) {
+    form {
+        width: 85%;
+    }
+
+    .logo {
+        width: 180px;
+    }
+}

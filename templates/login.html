@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-     <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
-
-
-
+    <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
 </head>
 <body>
 
-    <div class="container">
-        <h2>Iniciar sesión</h2>
+    <div class="top-section">
+        <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo" class="logo">
+    </div>
+
+    <div class="login-section">
 
         {% if mensaje %}
             <div class="error">
@@ -20,11 +20,15 @@
         {% endif %}
 
         <form method="POST" action="/login">
+
+            <label>CORREO</label>
             <input type="email" name="correo" placeholder="Correo institucional" required>
 
-            <input type="password" name="contrasena" placeholder="Contraseña" required>
+            <label>CONTRASEÑA</label>
+            <input type="password" name="contrasena" placeholder="******" required>
 
-            <button type="submit">Entrar</button>
+            <button type="submit">Iniciar sesión</button>
+
         </form>
     </div>
 

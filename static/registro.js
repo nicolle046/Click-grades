@@ -11,7 +11,7 @@ function volverRegistro() {
     window.location.href = "/";
 }
 
-/* ALERTA FLOTANTE */
+/* alerta flotante */
 function mostrarAlertaCorreo() {
     const alerta = document.getElementById("alerta-correo");
     alerta.classList.add("mostrar");
@@ -21,7 +21,7 @@ function mostrarAlertaCorreo() {
     }, 3000);
 }
 
-/* VALIDACIÓN CORREO INSTITUCIONAL */
+/* para validar correo institucional */
 document.addEventListener("DOMContentLoaded", function () {
     mostrarCampos();
 
@@ -31,8 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
         form.addEventListener("submit", function (e) {
             const correo = document.querySelector('input[name="correo"]').value;
 
-            // CAMBIA ESTE DOMINIO AL REAL DE TU COLEGIO
-            if (!correo.endsWith("@colegio.edu.co")) {
+            if (!correo.toLowerCase().endsWith("@comfandi.edu.co")) {
                 e.preventDefault();
                 mostrarAlertaCorreo();
             }

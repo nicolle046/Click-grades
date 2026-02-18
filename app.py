@@ -22,14 +22,14 @@ def home():
 def registro():
     nombre = request.form.get("nombre", "").strip()
     apellido = request.form.get("apellido", "").strip()
-    correo = request.form.get("correo", "").strip()
+    correo = request.form.get("correo", "").strip().lower()
     contrasena = request.form.get("contrasena", "")
     rol = request.form.get("rol", "")
 
     grado = request.form.get("grado")
     grupo = request.form.get("grupo")
 
-    if not correo.endswith("comfandi.edu.co"):
+    if not correo.endswith("@comfandi.edu.co"):
         return "<h3>Solo se permiten correos institucionales</h3>"
 
     try:

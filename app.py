@@ -159,6 +159,10 @@ def logout():
     session.clear()
     return redirect(url_for("login"))
 
+@app.route ("/dashboard_prof")
+def dashboard_prof(): {
+
+}
 
 if __name__ == "__main__":
     app.run(debug=True)

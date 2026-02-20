@@ -73,8 +73,19 @@ CREATE TABLE profesor_asignatura (
 
 CREATE TABLE periodo (
     id_periodo INTEGER PRIMARY KEY AUTOINCREMENT,
-    nombre TEXT NOT NULL
+    numero INTEGER NOT NULL CHECK (numero BETWEEN 1 AND 4),
+    nombre TEXT NOT NULL,
+    fecha_inicio TEXT,
+    fecha_fin TEXT,
+    activo INTEGER DEFAULT 0 CHECK (activo IN (0,1)),
+    cerrado INTEGER DEFAULT 0 CHECK (cerrado IN (0,1))
 );
+                     
+INSERT INTO periodo (numero, nombre, activo, cerrado) VALUES
+(1, 'Periodo 1', 1, 0),
+(2, 'Periodo 2', 0, 0),
+(3, 'Periodo 3', 0, 0),
+(4, 'Periodo 4', 0, 0);
 
 CREATE TABLE tema (
     id_tema INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -87,13 +98,15 @@ CREATE TABLE tema (
 
 CREATE TABLE nota (
     id_nota INTEGER PRIMARY KEY AUTOINCREMENT,
-    valor TEXT NOT NULL CHECK (valor IN ('Bajo', 'Basico', 'Alto', 'Superior')),
+    valor_numerico REAL NOT NULL CHECK (valor_numerico >= 1 AND valor_numerico <= 5),
+    valor_cualitativo TEXT NOT NULL CHECK (valor_cualitativo IN ('Bajo', 'Basico', 'Alto', 'Superior')),
     id_estudiante INTEGER NOT NULL,
     id_tema INTEGER NOT NULL,
     id_profesor INTEGER NOT NULL,
     FOREIGN KEY (id_estudiante) REFERENCES estudiante(id_estudiante),
     FOREIGN KEY (id_tema) REFERENCES tema(id_tema),
     FOREIGN KEY (id_profesor) REFERENCES profesor(id_profesor)
+);
 );
 
 CREATE TABLE plan_mejoramiento (
@@ -106,6 +119,8 @@ CREATE TABLE plan_mejoramiento (
     FOREIGN KEY (id_estudiante) REFERENCES estudiante(id_estudiante),
     FOREIGN KEY (id_tema) REFERENCES tema(id_tema)
 );
+
+
 """)
 
 conn.commit()

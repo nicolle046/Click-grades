@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Sistema Escolar{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='panel_p.css') }}">
+</head>
+<body>
+
+<header class="topbar">
+    <div class="menu-icon" onclick="toggleSidebar()">☰</div>
+    <div class="topbar-right">
+        <a href="/contacto" class="sobre-link">Contacto</a>
+    </div>
+</header>
+
+{% if session.get('rol') == 'profesor' %}
+<aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+        <span onclick="toggleSidebar()" class="menu-icon">☰</span>
+        <span>Menu</span>
+    </div>
+
+    <a href="/profesor">Inicio</a>
+    <a href="#">Mis cursos</a>
+    <a href="#">Reportes</a>
+    <a href="#">Perfil</a>
+    <a href="/logout">Cerrar sesión</a>
+</aside>
+{% endif %}
+
+<main class="main-content">
+    {% block content %}
+    {% endblock %}
+</main>
+
+<footer class="footer">
+    <div class="footer-container">
+
+        <div class="footer-col">
+            <h4>Nuestro sistema</h4>
+            <p>Plataforma digital institucional</p>
+            <p>Automatización de procesos académicos</p>
+            <p>Evaluación y monitoreo educativo</p>
+        </div>
+
+        <div class="footer-col">
+            <h4>Seguridad y soporte</h4>
+            <a href="#">Política de tratamiento de datos</a>
+            <a href="#">Términos y condiciones</a>
+            <a href="#">Soporte técnico</a>
+            <a href="#">Línea de ayuda</a>
+        </div>
+
+        <div class="footer-col">
+            <h4>Sobre nosotros</h4>
+            <a href="#">Objetivo del proyecto</a>
+            <a href="#">Equipo desarrollador</a>
+            <a href="#">¿Qué es la plataforma?</a>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        <p>© 2026 Click Grade's - Plataforma académica institucional</p>
+    </div>
+</footer>
+
+<script>
+function toggleSidebar(){
+    document.getElementById("sidebar").classList.toggle("active");
+}
+</script>
+
+</body>
+</html>

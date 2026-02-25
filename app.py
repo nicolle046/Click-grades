@@ -10,16 +10,30 @@ DB_PATH = os.path.join(BASE_DIR, "database.db")
 
 
 def get_db():
-    return sqlite3.connect(DB_PATH)
+    conn = sqlite3.connect(DB_PATH)
+    conn.row_factory = sqlite3.Row
+    return conn
 
+
+# -----------------------
+# HOME
+# -----------------------
 
 @app.route("/")
 def home():
     return render_template("registro.html")
 
 
-@app.route("/registro", methods=["POST"])
+# -----------------------
+# REGISTRO
+# -----------------------
+
+@app.route("/registro", methods=["GET", "POST"])
 def registro():
+
+    if request.method == "GET":
+        return render_template("registro.html")
+
     nombre = request.form.get("nombre", "").strip()
     apellido = request.form.get("apellido", "").strip()
     correo = request.form.get("correo", "").strip().lower()
@@ -52,7 +66,7 @@ def registro():
         id_usuario = cursor.lastrowid
 
         if rol == "estudiante":
-        
+
             if not grado or not grupo:
                 conn.close()
                 return "<h3>Debe seleccionar grado y grupo</h3>"
@@ -64,7 +78,7 @@ def registro():
             curso = cursor.fetchone()
 
             if curso:
-                id_curso = curso[0]
+                id_curso = curso["id_curso"]
             else:
                 cursor.execute(
                     "INSERT INTO curso (grado, grupo) VALUES (?, ?)",
@@ -78,6 +92,7 @@ def registro():
             """, (id_usuario, nombre, apellido, id_curso))
 
         elif rol == "profesor":
+
             cursor.execute("""
                 INSERT INTO profesor (id_usuario, nombre, apellido)
                 VALUES (?, ?, ?)
@@ -89,6 +104,7 @@ def registro():
 
         conn.commit()
         conn.close()
+
         return render_template(
             "registro.html",
             mensaje="Usuario registrado exitosamente"
@@ -96,7 +112,7 @@ def registro():
 
     except sqlite3.Error as e:
         return f"<h3>Error de base de datos: {e}</h3>"
-    
+
 @app.route("/login", methods=["GET", "POST"])
 def login():
     mensaje = None
@@ -105,66 +121,61 @@ def login():
         correo = request.form.get("correo", "").strip()
         contrasena = request.form.get("contrasena", "")
 
-        try:
-            conn = get_db()
-            cursor = conn.cursor()
+        conn = get_db()
+        cursor = conn.cursor()
 
-            cursor.execute(
-                "SELECT id_usuario, rol FROM usuario WHERE correo = ? AND contrasena = ?",
-                (correo, contrasena)
-            )
+        cursor.execute(
+            """
+            SELECT u.id_usuario, u.rol, p.nombre
+            FROM usuario u
+            LEFT JOIN profesor p ON u.id_usuario = p.id_usuario
+            WHERE u.correo = ? AND u.contrasena = ?
+            """,
+            (correo, contrasena)
+        )
 
-            usuario = cursor.fetchone()
-            conn.close()
+        usuario = cursor.fetchone()
+        conn.close()
 
-            if usuario:
-                session["usuario_id"] = usuario[0]
-                session["correo"] = correo
-                session["rol"] = usuario[1]
+        if usuario:
+            session["usuario_id"] = usuario["id_usuario"]
+            session["correo"] = correo
+            session["rol"] = usuario["rol"]
+            session["nombre"] = usuario["nombre"]
 
-                return redirect(url_for("dashboard"))
+            if usuario["rol"] == "profesor":
+                return redirect(url_for("panel_profesor"))
+            elif usuario["rol"] == "estudiante":
+                return redirect(url_for("panel_estudiante"))
             else:
-                mensaje = "Correo o contraseña no válidos"
-
-        except sqlite3.Error as e:
-            return f"<h3>Error de base de datos: {e}</h3>"
+                return redirect(url_for("login"))
+        else:
+            mensaje = "Correo o contraseña no válidos"
 
     return render_template("login.html", mensaje=mensaje)
 
+@app.route("/profesor")
+def panel_profesor():
 
-@app.route("/dashboard")
-def dashboard():
-    if "usuario_id" not in session:
+    if "usuario_id" not in session or session["rol"] != "profesor":
         return redirect(url_for("login"))
 
-    rol = session.get("rol")
-    correo = session.get("correo")
+    return render_template("profesor/panel_profesor.html")
 
-    if rol == "estudiante":
-        mensaje = "Panel de Estudiante"
-    elif rol == "profesor":
-        mensaje = "Panel de Profesor"
-    else:
-        mensaje = "Panel General"
 
-    return f"""
-    <h2>{mensaje}</h2>
-    <p>Bienvenido</p>
-    <a href='/logout'>Cerrar sesión</a>
-    """
+@app.route("/estudiante")
+def panel_estudiante():
 
+    if "usuario_id" not in session or session["rol"] != "estudiante":
+        return redirect(url_for("login"))
+
+    return render_template("estudiante/panel_estudiante.html")
 
 @app.route("/logout")
 def logout():
     session.clear()
     return redirect(url_for("login"))
 
-@app.route ("/dashboard_prof")
-def dashboard_prof(): {
-
-}
 
 if __name__ == "__main__":
     app.run(debug=True)
-
-   

@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}Panel Profesor{% endblock %}
+
+{% block content %}
+
+<!-- BIENVENIDA -->
+<section class="welcome-section">
+    <div class="welcome-text">
+        <h1>Bienvenido(a)</h1>
+        <p>{{ session['nombre'] }}</p>
+    </div>
+
+    <div class="welcome-logo">
+        <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo">
+    </div>
+</section>
+
+<!-- CURSOS RECIENTES -->
+<h2 class="section-title">Cursos recientes</h2>
+
+<div class="courses-grid">
+    <div class="course-box">
+        <div class="course-top">11-1</div>
+        <div class="course-bottom"></div>
+    </div>
+
+    <div class="course-box">
+        <div class="course-top">9-3</div>
+        <div class="course-bottom"></div>
+    </div>
+
+    <div class="course-box">
+        <div class="course-top">10-3</div>
+        <div class="course-bottom"></div>
+    </div>
+</div>
+
+<!-- REPORTE GENERAL -->
+<section class="report-section">
+    <h2>Reporte general</h2>
+
+    <div class="report-content">
+        <div class="fake-chart"></div>
+
+        <div class="report-buttons">
+            <button class="action-btn">Ingresar notas ✏️</button>
+            <button class="action-btn">Más información 📊</button>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

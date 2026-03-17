@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+        <span onclick="toggleSidebar()" class="menu-icon">☰</span>
+        <span>Menu</span>
+    </div>
+
+    <a href="{{ url_for('panel_profesor') }}">Inicio</a>
+    <a href="{{ url_for('mis_cursos') }}">Mis cursos</a>
+    <a href="{{ url_for('reportes') }}">Reportes</a>
+    <a href="{{ url_for('perfil') }}">Perfil</a>
+    <a href="{{ url_for('logout') }}">Cerrar sesión</a>
+</aside>
+
+<div>
+    {% block contenido_profesor %}
+    {% endblock %}
+</div>
+
+{% block scripts %}
+<script>
+function toggleSidebar() {
+    const sidebar = document.getElementById("sidebar");
+    console.log("click menu");
+    sidebar.classList.toggle("active");
+}
+</script>
+{% endblock %}
+
+{% endblock %}

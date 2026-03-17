@@ -176,6 +176,20 @@ def logout():
     session.clear()
     return redirect(url_for("login"))
 
+@app.route('/mis_cursos')
+def mis_cursos():
+    return render_template('profesor/mis_cursos.html')
+
+
+@app.route('/reportes')
+def reportes():
+    return render_template('profesor/reportes.html')
+
+
+@app.route('/perfil')
+def perfil():
+    return render_template('profesor/perfil.html')
+
 
 if __name__ == "__main__":
     app.run(debug=True)

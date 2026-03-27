@@ -1,22 +1,27 @@
 {% extends 'base.html' %}
 
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='panel_e.css') }}">
+{% endblock %}
+
 {% block content %}
 
 <aside class="sidebar" id="sidebar">
     <div class="sidebar-header">
         <span onclick="toggleSidebar()" class="menu-icon">☰</span>
-        <span>Menu</span>
+        <span>Menú</span>
     </div>
 
-    <a href="{{ url_for('panel_profesor') }}">Inicio</a>
-    <a href="{{ url_for('mis_cursos') }}">Mis cursos</a>
-    <a href="{{ url_for('reportes') }}">Reportes</a>
-    <a href="{{ url_for('perfil_p') }}">Perfil</a>
+    <a href="{{ url_for('panel_estudiante') }}">Inicio</a>
+    <a href="{{ url_for('asignaturas') }}">Asignaturas</a>
+    <a href="{{ url_for('mis_estadisticas') }}">Mis estadísticas</a>
+    <a href="{{ url_for('planes_mejoramiento') }}">Planes de mejoramiento</a>
+    <a href="{{ url_for('perfil_e') }}">Perfil</a>
     <a href="{{ url_for('logout') }}">Cerrar sesión</a>
 </aside>
 
 <div>
-    {% block contenido_profesor %}
+    {% block contenido_estudiante %}
     {% endblock %}
 </div>
 

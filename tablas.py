@@ -61,7 +61,6 @@ CREATE TABLE asignatura (
     nombre TEXT NOT NULL
 );
 
--- TABLA CLAVE
 CREATE TABLE carga_academica (
     id_carga INTEGER PRIMARY KEY AUTOINCREMENT,
     id_profesor INTEGER NOT NULL,
@@ -73,7 +72,6 @@ CREATE TABLE carga_academica (
     UNIQUE(id_profesor, id_asignatura, id_curso)
 );
 
--- NUEVA TABLA PARA RECORDAR ÚLTIMA MATERIA ABIERTA
 CREATE TABLE ultima_materia_abierta (
     id_profesor INTEGER NOT NULL,
     id_curso INTEGER NOT NULL,
@@ -129,6 +127,14 @@ CREATE TABLE plan_mejoramiento (
     fecha TEXT NOT NULL,
     FOREIGN KEY (id_estudiante) REFERENCES estudiante(id_estudiante),
     FOREIGN KEY (id_tema) REFERENCES tema(id_tema)
+);
+
+CREATE TABLE admin (
+    id_admin INTEGER PRIMARY KEY AUTOINCREMENT,
+    id_usuario INTEGER,
+    nombre TEXT,
+    apellido TEXT,
+    FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario)
 );
 """)
 

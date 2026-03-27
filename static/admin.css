@@ -1,0 +1,73 @@
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f2f2f2;
+    margin: 0;
+}
+
+/* TOPBAR */
+.topbar {
+    background-color: #114c5f;
+    padding: 15px;
+    text-align: right;
+}
+
+.topbar a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* BIENVENIDA */
+.bienvenida {
+    background-color: #1f5e6b;
+    color: white;
+    margin: 30px auto;
+    padding: 20px;
+    width: 60%;
+    border-radius: 12px;
+    text-align: center;
+}
+
+/* FILTROS */
+.filtros {
+    width: 60%;
+    margin: auto;
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.filtros input, .filtros select {
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+/* TABLA */
+table {
+    width: 60%;
+    margin: auto;
+    border-collapse: collapse;
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+th {
+    background-color: #114c5f;
+    color: white;
+    padding: 10px;
+}
+
+td {
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+a {
+    margin: 0 5px;
+    text-decoration: none;
+    color: #114c5f;
+    font-weight: bold;
+}

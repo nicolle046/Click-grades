@@ -1,0 +1,258 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f2f2f2;
+}
+
+/* TOPBAR */
+.topbar {
+    background-color: #114c5f;
+    color: white;
+    padding: 20px 35px; 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.menu-icon {
+    font-size: 26px;
+    cursor: pointer;
+}
+
+.topbar-right {
+    font-size: 18px;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: -250px;
+    width: 250px;
+    height: 100%;
+    background-color: #0e3e4c;
+    padding-top: 60px;
+    transition: 0.3s;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar.active {
+    left: 0;
+}
+
+.sidebar a {
+    padding: 15px 25px;
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.sidebar a:hover {
+    background-color: #135c72;
+}
+
+.menu-title {
+    color: white;
+    padding-left: 25px;
+    margin-bottom: 20px;
+}
+
+.main-content {
+    padding: 20px 40px;
+}
+
+.welcome-section {
+    background: linear-gradient(90deg, #4e8ca0, #3f7f94);
+    border-radius: 12px;
+    padding: 25px 40px;
+
+    display: flex;
+    justify-content: center; 
+}
+
+.welcome-content {
+    display: flex;
+    align-items: center;
+    gap: 40px; 
+}
+
+.welcome-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;  
+    color: white;
+}
+
+.welcome-text h1 {
+    margin: 0;
+    font-size: 40px;
+}
+
+.welcome-text p {
+    margin: 5px 0 0 0;
+    font-size: 25px;
+}
+
+.welcome-logo img {
+    height: 100px; 
+    width: auto;
+}
+
+/* CURSOS */
+.section-title {
+    margin-top: 40px;
+}
+
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px 20px;
+    color: white;
+    font-weight: bold;
+}
+
+.courses-grid {
+    display: flex;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.course-box {
+    width: 200px;
+    height: 180px;
+    border-radius: 15px;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    transition: 0.3s;
+    display: flex;
+    flex-direction: column;
+}
+
+.course-box:hover {
+    transform: scale(1.05);
+}
+
+.course-top {
+    background-color: #0f2c5c;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.course-bottom {
+    flex: 1;
+    background: linear-gradient(180deg, #6fa3c1, #ffffff);
+}
+
+.report-section {
+    margin-top: 80px;
+    border: 2px solid #0f2c5c;
+    border-radius: 12px;
+    padding: 30px;
+}
+
+.report-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 60px;
+    margin-top: 20px;
+}
+
+.fake-chart {
+    width: 350px;
+    height: 220px;
+    border: 2px solid #0f2c5c;
+    border-radius: 8px;
+    background: none;
+}
+
+.report-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.action-btn {
+    padding: 15px 25px;
+    border-radius: 30px;
+    border: none;
+    font-size: 18px;
+    background-color: #eaeaea;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    transition: 0.3s;
+}
+
+.action-btn:hover {
+    transform: translateY(-3px);
+}
+
+.topbar-right .sobre-link {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.topbar-right .sobre-link:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+/*FOOTER*/
+
+.footer {
+    background-color: #0e4c59;
+    color: white;
+    padding: 40px 0 0 0;
+    margin-top: 60px;
+}
+
+.footer-container {
+    width: 90%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.footer-col {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-width: 220px;
+}
+
+.footer-col h4 {
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.footer-col p {
+    margin: 0;
+    font-size: 14px;
+    color: #cfe7ec;
+}
+
+.footer-col a {
+    text-decoration: none;
+    color: #cfe7ec;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.footer-col a:hover {
+    color: white;
+    transform: translateX(4px);
+}
+
+.footer-bottom {
+    text-align: center;
+    padding: 15px;
+    background-color: #0b3f49;
+    margin-top: 30px;
+    font-size: 14px;
+}

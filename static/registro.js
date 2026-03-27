@@ -1,9 +1,11 @@
 function mostrarCampos() {
     const rol = document.getElementById("rol").value;
-    const campos = document.getElementById("campos_estudiante");
+    const camposEstudiante = document.getElementById("campos_estudiante");
 
-    if (campos) {
-        campos.style.display = (rol === "estudiante") ? "flex" : "none";
+    if (rol === "estudiante") {
+        camposEstudiante.style.display = "flex";
+    } else {
+        camposEstudiante.style.display = "none";
     }
 }
 

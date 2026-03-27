@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Panel Admin</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='admin.css') }}">
+</head>
+<body>
+
+<div class="topbar">
+    <a href="{{ url_for('logout') }}">Cerrar sesión</a>
+</div>
+
+<div class="bienvenida">
+    <h2>Bienvenido/a</h2>
+    <p>{{ session["nombre"] if session["nombre"] else "Usuario" }}</p>
+</div>
+
+<!-- FILTRO + BUSCADOR -->
+<form method="GET" class="filtros">
+    <select name="rol">
+    <option value="">Todos</option>
+    <option value="estudiante" {% if request.args.get("rol") == "estudiante" %}selected{% endif %}>Estudiantes</option>
+    <option value="profesor" {% if request.args.get("rol") == "profesor" %}selected{% endif %}>Profesores</option>
+    <option value="admin" {% if request.args.get("rol") == "admin" %}selected{% endif %}>Admin</option>
+</select>
+
+    <input type="text" name="busqueda" placeholder="Buscar correo...">
+
+    <button type="submit">Filtrar</button>
+</form>
+
+<!-- TABLA -->
+<table>
+    <thead>
+        <tr>
+            <th>Usuario</th>
+            <th>Correo</th>
+            <th>Rol</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+
+    <tbody>
+    {% for u in usuarios %}
+    <tr>
+        <td>{{ u["nombre"] }} {{ u["apellido"] }}</td>
+        <td>{{ u["correo"] }}</td>
+        <td>{{ u["rol"] }}</td>
+
+        <td>
+            <a href="#">Editar</a>
+
+            <a href="{{ url_for('eliminar_usuario', id=u['id_usuario']) }}"
+               onclick="return confirm('¿Seguro que quieres eliminar este usuario?')">
+               Eliminar
+            </a>
+        </td>
+    </tr>
+    {% endfor %}
+</tbody>
+</table>
+
+</body>
+</html>

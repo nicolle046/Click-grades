@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}Sistema Escolar{% endblock %}</title>
+    {% block styles %}
     <link rel="stylesheet" href="{{ url_for('static', filename='panel_p.css') }}">
+    {% endblock %}
 </head>
 <body>
 

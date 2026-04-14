@@ -109,10 +109,16 @@ CREATE TABLE tema (
 
 CREATE TABLE nota (
     id_nota INTEGER PRIMARY KEY AUTOINCREMENT,
-    valor_numerico REAL NOT NULL CHECK (valor_numerico >= 1 AND valor_numerico <= 5),
+    valor_numerico REAL CHECK (valor_numerico >= 1 AND valor_numerico <= 5),
+
     id_estudiante INTEGER NOT NULL,
     id_carga INTEGER NOT NULL,
-    id_tema INTEGER NOT NULL,
+
+    id_tema INTEGER,
+    posicion INTEGER,
+
+    promedio TEXT,
+
     FOREIGN KEY (id_estudiante) REFERENCES estudiante(id_estudiante),
     FOREIGN KEY (id_carga) REFERENCES carga_academica(id_carga),
     FOREIGN KEY (id_tema) REFERENCES tema(id_tema)
@@ -136,9 +142,73 @@ CREATE TABLE admin (
     apellido TEXT,
     FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario)
 );
+
+CREATE TABLE encabezado_notas (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id_carga INTEGER,
+    nombre_columna TEXT,
+    posicion INTEGER
+);
+
+CREATE TABLE promedio_estudiante (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id_estudiante INTEGER,
+    id_carga INTEGER,
+    promedio TEXT,
+    UNIQUE(id_estudiante, id_carga)
+);
+""")
+
+cursor.executescript("""
+
+INSERT INTO asignatura (nombre) VALUES
+('Lenguaje'),
+('Economía'),
+('Artes'),
+('Inglés'),
+('Música'),
+('Filosofía'),
+('Física'),
+('Matemáticas'),
+('Especialidad Electrónica'),
+('Especialidad Desarrollo de Software'),
+('Especialidad Electricidad'),
+('Educación Física'),
+('Ética'),
+('Química'),
+('Biología'),
+('Informática'),
+('Ciencias Sociales'),
+('Religión'),
+('Cátedra de Paz');
+
+-- =========================
+-- CURSOS (6° a 11°, grupos 1 a 5)
+-- =========================
+
+-- Sexto
+INSERT INTO curso (grado, grupo) VALUES
+('6', '1'), ('6', '2'), ('6', '3'), ('6', '4'), ('6', '5'),
+
+-- Séptimo
+('7', '1'), ('7', '2'), ('7', '3'), ('7', '4'), ('7', '5'),
+
+-- Octavo
+('8', '1'), ('8', '2'), ('8', '3'), ('8', '4'), ('8', '5'),
+
+-- Noveno
+('9', '1'), ('9', '2'), ('9', '3'), ('9', '4'), ('9', '5'),
+
+-- Décimo
+('10', '1'), ('10', '2'), ('10', '3'), ('10', '4'), ('10', '5'),
+
+-- Once
+('11', '1'), ('11', '2'), ('11', '3'), ('11', '4'), ('11', '5');
 """)
 
 conn.commit()
 conn.close()
+
+
 
 print("Base de datos PROFESIONAL creada correctamente")

@@ -1,10 +1,8 @@
 {% extends 'profesor/base_profesor.html' %}
 
-{% block title %}Click Grade's/profesor{% endblock %}
+{% block title %}Click Grade's{% endblock %}
 
 {% block contenido_profesor %}
-
-
 
 <!-- BIENVENIDA -->
 <section class="welcome-section">
@@ -38,6 +36,15 @@
     </div>
 </div>
 
+<!-- ACCESO RÁPIDO -->
+<h2 class="section-title">Acceso rápido</h2>
+
+<div class="quick-access">
+    <a href="{{ url_for('planilla') }}">
+        <button class="action-btn">Ir a Planilla 📋</button>
+    </a>
+</div>
+
 <!-- REPORTE GENERAL -->
 <section class="report-section">
     <h2>Reporte general</h2>
@@ -46,8 +53,12 @@
         <div class="fake-chart"></div>
 
         <div class="report-buttons">
-            <button class="action-btn">Ingresar notas ✏️</button>
-            <button class="action-btn">Más información 📊</button>
+            <a href="{{ url_for('planilla') }}">
+                <button class="action-btn">Ingresar notas ✏️</button>
+            </a>
+            <a href="{{ url_for('reportes') }}"> 
+                <button class="action-btn">Más información 📊</button>
+            </a>
         </div>
     </div>
 </section>

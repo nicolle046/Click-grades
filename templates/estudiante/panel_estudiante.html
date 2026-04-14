@@ -1,9 +1,90 @@
 {% extends 'estudiante/base_estudiante.html' %}
 
-{% block title %}Click Grade's/estudiante{% endblock %}
+{% block title %}Click Grade's | Panel Estudiante{% endblock %}
 
 {% block contenido_estudiante %}
 
-<h2>Bienvenido estudiante</h2>
+<div class="container mt-4">
+    
+    <div class="row mb-4">
+        <div class="col">
+            <h2 class="fw-bold text-dark">
+                Bienvenido, {{ session.get('nombre', 'Estudiante') }} 👋
+            </h2>
+            <p class="text-secondary">
+                Este es tu resumen académico para el periodo actual.
+            </p>
+        </div>
+    </div>
+
+    <div class="row g-4">
+
+        <!-- 🔥 ASIGNATURAS -->
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm border-0">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold text-primary">Mis Notas</h5>
+                    <p class="card-text">
+                        Consulta tus calificaciones y el progreso de tus materias.
+                    </p>
+                    <a href="{{ url_for('asignaturas') }}" class="btn btn-outline-primary w-100">
+                        Ver Asignaturas
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 📊 ESTADÍSTICAS -->
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm border-0">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold text-success">Estadísticas</h5>
+                    <p class="card-text">
+                        Visualiza tu rendimiento general mediante gráficos.
+                    </p>
+                    <a href="{{ url_for('mis_estadisticas') }}" class="btn btn-outline-success w-100">
+                        Ver Gráficos
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 📘 PLANES (SIN IA) -->
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm border-0 bg-light border-start border-warning border-4">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold text-warning-emphasis">
+                        Planes de Mejoramiento
+                    </h5>
+                    <p class="card-text">
+                        Consulta tus actividades de refuerzo asignadas por tus profesores.
+                    </p>
+                    <a href="{{ url_for('planes_mejoramiento') }}" class="btn btn-warning w-100">
+                        Ver Planes
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- 👤 PERFIL -->
+    <div class="row mt-5">
+        <div class="col-12">
+            <div class="p-4 bg-white rounded shadow-sm d-flex align-items-center justify-content-between">
+                <div>
+                    <h5 class="mb-0 fw-bold">Tu información personal</h5>
+                    <p class="text-muted mb-0">
+                        Mantén tus datos actualizados para recibir notificaciones.
+                    </p>
+                </div>
+                <a href="{{ url_for('perfil_e') }}" class="btn btn-dark">
+                    Ir a mi Perfil
+                </a>
+            </div>
+        </div>
+    </div>
+
+</div>
 
 {% endblock %}

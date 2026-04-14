@@ -6,6 +6,7 @@
 
 {% block content %}
 
+<!-- SIDEBAR -->
 <aside class="sidebar" id="sidebar">
     <div class="sidebar-header">
         <span onclick="toggleSidebar()" class="menu-icon">☰</span>
@@ -20,7 +21,8 @@
     <a href="{{ url_for('logout') }}">Cerrar sesión</a>
 </aside>
 
-<div>
+<!-- CONTENIDO -->
+<div class="main-content">
     {% block contenido_estudiante %}
     {% endblock %}
 </div>
@@ -29,7 +31,6 @@
 <script>
 function toggleSidebar() {
     const sidebar = document.getElementById("sidebar");
-    console.log("click menu");
     sidebar.classList.toggle("active");
 }
 </script>

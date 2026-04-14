@@ -1,0 +1,37 @@
+{% extends 'estudiante/base_estudiante.html' %}
+
+{% block contenido_estudiante %}
+
+<h2>{{ materia['asignatura'] }}</h2>
+
+<table class="table table-bordered text-center">
+
+    <thead>
+        <tr>
+            {% for col in encabezados %}
+                <th>{{ col['nombre_columna'] }}</th>
+            {% endfor %}
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr>
+            {% for col in encabezados %}
+                <td>
+                    {% for nota in notas %}
+                        {% if nota['posicion'] == col['posicion'] %}
+                            {{ nota['valor_numerico'] }}
+                        {% endif %}
+                    {% endfor %}
+                </td>
+            {% endfor %}
+        </tr>
+    </tbody>
+
+</table>
+
+{% if promedio %}
+<p><strong>Promedio:</strong> {{ promedio['promedio'] }}</p>
+{% endif %}
+
+{% endblock %}

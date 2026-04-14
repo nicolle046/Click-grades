@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar usuario</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='editar_usuario.css') }}">
+</head>
+<body>
+
+<div class="container">
+
+    <h2>Editar usuario</h2>
+    <p class="info">
+        {{ usuario.correo }}
+    </p>
+
+    <form method="POST">
+
+        <!-- CONTRASEÑA -->
+        <div class="bloque">
+            <h3>Cambiar contraseña</h3>
+            <input type="password" name="contrasena" placeholder="Nueva contraseña">
+        </div>
+
+        <!-- CARGA ACADÉMICA -->
+        {% if usuario.rol == "profesor" %}
+        <div class="bloque">
+            <h3>Asignar materias y cursos</h3>
+
+            <div id="carga-container"></div>
+
+            <button type="button" onclick="agregarCarga()">+ Añadir asignación</button>
+        </div>
+        {% endif %}
+
+        <button type="submit" class="guardar">Guardar cambios</button>
+
+    </form>
+
+    <a href="{{ url_for('panel_admin') }}" class="volver">⬅ Volver</a>
+
+</div>
+
+<script>
+const asignaturas = {{ asignaturas|tojson }};
+const cursos = {{ cursos|tojson }};
+</script>
+
+<script>
+const cargasActuales = {{ cargas_actuales|tojson }};
+</script>
+
+<script src="{{ url_for('static', filename='editar_usuario.js') }}"></script>
+
+</body>
+</html>

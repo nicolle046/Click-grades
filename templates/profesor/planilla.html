@@ -1,0 +1,86 @@
+{% extends 'profesor/base_profesor.html' %}
+
+{% block title %}Planilla{% endblock %}
+
+{% block contenido_profesor %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='planilla.css') }}">
+
+<h2>Planilla</h2>
+
+<form method="POST">
+    <label>Seleccione su curso:</label>
+
+    <select name="id_carga" required>
+        <option value="">Seleccione</option>
+
+        {% for c in cargas %}
+            <option value="{{ c.id_carga }}"
+            {% if id_carga and id_carga|string == c.id_carga|string %}selected{% endif %}>
+                {{ c.materia }} - {{ c.grado }}°{{ c.grupo }}
+            </option>
+        {% endfor %}
+    </select>
+
+    <button type="submit">Cargar Planilla</button>
+</form>
+
+<br>
+
+{% if estudiantes %}
+
+<button type="button" onclick="agregarColumna()">➕ Agregar Nota</button>
+
+<div class="tabla-wrapper">
+
+<table class="tabla-planilla" id="tabla">
+    <thead>
+        <tr id="fila-head">
+            <th>#</th>
+            <th>Apellido</th>
+            <th>Nombre</th>
+
+            {% for nombre in encabezados %}
+                <th contenteditable="true" class="encabezado-editable">{{ nombre }}</th>
+            {% endfor %}
+
+            <th>Promedio</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for estudiante in estudiantes %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ estudiante[1] }}</td>
+            <td>{{ estudiante[0] }}</td>
+
+            {% for nota in estudiante[2:-1] %}
+            <td>
+                <select class="nota-select">
+                    <option value=""></option>
+                    <option value="B" {% if nota == "B" %}selected{% endif %}>Bajo</option>
+                    <option value="BS" {% if nota == "BS" %}selected{% endif %}>Básico</option>
+                    <option value="A" {% if nota == "A" %}selected{% endif %}>Alto</option>
+                    <option value="S" {% if nota == "S" %}selected{% endif %}>Superior</option>
+                </select>
+            </td>
+            {% endfor %}
+
+            <!-- 🔥 PROMEDIO EDITABLE Y CARGADO -->
+            <td contenteditable="true" class="promedio">{{ estudiante[-1] }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+</div>
+
+<br>
+<button type="button" onclick="guardarNotas()">Guardar Notas</button>
+
+{% endif %}
+
+<script src="{{ url_for('static', filename='planilla.js') }}"></script>
+
+{% endblock %}
